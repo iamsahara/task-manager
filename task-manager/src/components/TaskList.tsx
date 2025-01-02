@@ -1,9 +1,13 @@
 import { useTaskContext } from "../context/TaskContext";
 
-const TaskList = () => {
+
+function TaskList(){
   const { state } = useTaskContext();
+  if (!state.tasks || state.tasks.length === 0) {
+    return <p>No tasks available</p>;
+  }
   return (
-    <div>
+    <div color="red">
       <h1>Tasks</h1>
       {state.tasks.map((task) => (
         <div key={task.id}>
@@ -12,6 +16,7 @@ const TaskList = () => {
           <p>Status: {task.status}</p>
         </div>
       ))}
+      
     </div>
   );
 };
