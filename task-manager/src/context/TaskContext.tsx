@@ -1,4 +1,5 @@
-import { createContext, useReducer, ReactNode, useContext } from "react";
+import { createContext, useReducer, ReactNode, useContext, useEffect } from "react";
+import axios from "axios";
 
 interface Task {
   id: number;
@@ -23,12 +24,15 @@ const initialState: TaskState = {
 };
 
 type TaskActions =
+| { type: "SET-TASKS"; payload: Task[] }
   | { type: "ADD-TASK"; payload: Task }
   | { type: "DELETE-TASK"; payload: number }
   | { type: "UPDATE-STATUS"; payload: { id: number; status: TaskStatus } };
 
 const TaskReducer = (state: TaskState, action: TaskActions): TaskState => {
   switch (action.type) {
+    case "SET-TASKS":
+      return { tasks:action.payload};
     case "ADD-TASK":
       return { tasks: [...state.tasks, action.payload] };
     case "DELETE-TASK":
@@ -58,6 +62,18 @@ const TaskContext = createContext<{
 
 export const TaskProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(TaskReducer, initialState);
+  
+  useEffect(() => {
+    axios.get('http://localhost:5001/tasks')
+    .then((response)=>{ dispatch({ type: "SET-TASKS", payload: response.data });
+  })
+  .catch((error) => {
+    console.error("Error fetching tasks:", error);
+  });
+}, []);
+useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(state.tasks));
+  }, [state.tasks]);
   return (
     <TaskContext.Provider value={{ state, dispatch }}>
       {children}

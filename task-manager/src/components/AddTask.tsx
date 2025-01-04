@@ -1,12 +1,14 @@
 import { Box, TextField, Button } from "@mui/material";
 import { useTaskContext } from "../context/TaskContext";
 import { useState } from "react";
+import axios from "axios";
 
 function AddTask() {
   const { dispatch } = useTaskContext();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const handleAddTask = (e: React.FormEvent) => {
+
+  const handleAddTask = async(e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !description.trim()) {
       alert(" Please fill out all fields. ");
@@ -20,7 +22,9 @@ function AddTask() {
       completed: false,
       status: "To Do" as const,
     };
-    dispatch({ type: "ADD-TASK", payload: newTask });
+
+    const response = await axios.post("http://localhost:5001/tasks", newTask);
+    dispatch({ type: "ADD-TASK", payload: response.data });
     setTitle("");
     setDescription("");
   };
