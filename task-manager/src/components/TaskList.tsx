@@ -9,7 +9,7 @@ import {
 } from "react-beautiful-dnd";
 import axios from "axios";
 import { useState } from "react";
-import { red } from "@mui/material/colors";
+import DeleteTask from "./DeleteTask";
 
 function TaskList() {
   const { state, dispatch } = useTaskContext();
@@ -132,7 +132,6 @@ function TaskList() {
                           boxShadow: 3,
                           cursor: "move",
                           marginBottom: 2,
-                         
                         }}
                         elevation={3}
                       >
@@ -140,6 +139,7 @@ function TaskList() {
                         <Typography variant="body2" color="textSecondary">
                           {task.description}
                         </Typography>
+                        <DeleteTask taskId={task.id} />
                       </Paper>
                     )}
                   </Draggable>

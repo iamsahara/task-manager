@@ -29,7 +29,7 @@ const initialState: TaskState = {
 type TaskActions =
   | { type: "SET-TASKS"; payload: Task[] }
   | { type: "ADD-TASK"; payload: Task }
-  | { type: "DELETE-TASK"; payload: number }
+  | { type: "DELETE-TASK"; payload: string }
   | { type: "UPDATE-STATUS"; payload: { id: string; status: TaskStatus } };
 
 const TaskReducer = (state: TaskState, action: TaskActions): TaskState => {
