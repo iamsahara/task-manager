@@ -1,23 +1,31 @@
 import express from "express";
 import cors from "cors";
-let tasks = [];
+import { v4 as uuidv4 } from "uuid";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+let tasks = [];
+
+
 app.get("/tasks", (req, res) => {
   res.json(tasks);
 });
 
 app.post("/tasks", (req, res) => {
-  const newTask = req.body;
-  if (!newTask.id || !newTask.title || !newTask.position) {
-    console.error("Invalid task data:", newTask);
-    return res.status(400).json({ error: "Invalid task data" });
-  }
-  tasks.push(newTask); // Add the new task to the global array
-  console.log("Task added:", newTask);
-  res.status(201).json(newTask); // Respond with the added task
+  console.log("Received request bodyIMAN:", req.body);
+  const { title, description, status } = req.body;
+  const task = {
+    id: uuidv4(),
+    title,
+    description,
+    status: status || "To Do",
+    // position: position || { x: 0, y: 0 },
+  };
+
+  tasks.push(task);
+  console.log("Task added:", task);
+  res.status(201).json(task);
 });
 
 app.delete("/tasks/:id", (req, res) => {

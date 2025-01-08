@@ -61,7 +61,7 @@ const TaskContext = createContext<{
   dispatch: React.Dispatch<TaskActions>;
 }>({
   state: initialState,
-  dispatch: () => {},
+  dispatch: () => undefined,
 });
 
 export const TaskProvider = ({ children }: { children: ReactNode }) => {

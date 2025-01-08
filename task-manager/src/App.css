@@ -1,42 +1,27 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Centers content horizontally and vertically */
+  align-items: center; /* Align children vertically */
+  justify-content: center; /* Align children horizontally */
   text-align: center;
+  background: linear-gradient(-45deg, #c4afda, #709dea, #917585, #aad6a5);
+  background-size: 400% 400%; /* Creates smooth animation */
+  animation: gradientAnimation 15s ease infinite;
+  height: 100vh; /* Ensures it spans the full viewport height */
+  width: 100vw; /* Ensures it spans the full viewport width */
+  overflow: hidden; /* Prevents content overflow */
+  box-sizing: border-box; /* Ensures padding and borders don't affect dimensions */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    background-position: 100% 50%;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  100% {
+    background-position: 0% 50%;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }

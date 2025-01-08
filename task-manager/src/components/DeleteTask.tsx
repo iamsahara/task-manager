@@ -1,30 +1,35 @@
 import axios from "axios";
-import { Box, Button } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { useTaskContext } from "../context/TaskContext";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
-
-const handleDeleteTask = async ( taskId: string) => {
-  const { dispatch } = useTaskContext();
-
-  try {
-    await axios.delete(`http://localhost:5001/tasks/${taskId}`);
-    dispatch({ type: "DELETE-TASK", payload: taskId });
-    console.log(`Task with ID ${taskId} deleted successfully.`);
-  } catch (error) {
-    console.error(`Error deleting task with ID ${taskId}:`, error);
-  }
-};
 
 type DeleteTaskProps = {
-    taskId: string
+  taskId: string
 }
 
 function DeleteTask({taskId} : DeleteTaskProps ) {
+  const { dispatch } = useTaskContext();
+
+  const handleDeleteTask = async () => {
+    try {
+      await axios.delete(`http://localhost:5001/tasks/${taskId}`);
+      dispatch({ type: "DELETE-TASK", payload: taskId });
+      console.log(`Task with ID ${taskId} deleted successfully.`);
+    } catch (error) {
+      console.error(`Error deleting task with ID ${taskId}:`, error);
+    }
+  };
+  
   return (
-    <Box>
-      <Button onClick={()=>handleDeleteTask(taskId)}>Delete</Button>
-    </Box>
+<IconButton
+  onClick={handleDeleteTask}
+  sx={{
+    "&:hover": { backgroundColor: "#ffebee" }, // Light red background on hover
+  }}
+>
+  <DeleteOutlineIcon sx={{ fontSize: 24 }} />
+</IconButton>
   );
 }
-
 export default DeleteTask;
