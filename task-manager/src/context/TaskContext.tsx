@@ -16,9 +16,6 @@ interface Task {
   position: { x: 0; y: 0 };
 }
 
-interface TaskWithPriority extends Task {
-  priority: "Low" | "Medium" | "High";
-}
 
 type TaskStatus = "To Do" | "In Progress" | "Completed";
 interface TaskState {
@@ -54,7 +51,7 @@ const TaskReducer = (state: TaskState, action: TaskActions): TaskState => {
         ),
       };
     default:
-      console.warn("Unhandled action type:", action.type);
+      // console.warn("Unhandled action type:", action.type);
       return state;
   }
 };
