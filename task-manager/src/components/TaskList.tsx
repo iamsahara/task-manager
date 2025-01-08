@@ -83,12 +83,10 @@ function TaskList() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          gap: 2,
-          margin: 1,
-          width: "100%",
+          gap: 2, 
+          width: "80%",
           height: "100vh",
           padding: 3,
-          // background: "white",
           borderRadius: 4,
           // boxShadow: "0px 6px 20px rgba(0, 0, 0, 0.2)",
         }}
@@ -104,19 +102,19 @@ function TaskList() {
                   display: "flex",
                   flexDirection: "column",
                   gap: 3,
+                  overflowY:"auto",
                   backgroundColor:
-                    status === "To Do"
-                      ? "#ffebee"
-                      : status === "In Progress"
-                      ? "#e8f5e9"
-                      : "#ede7f6",
+                  status === "To Do"
+                        ? "#faf9f9"
+                        : status === "In Progress"
+                        ? "#d5b9b2"
+                        : "#bfb5af",
                   padding: 3,
                   borderRadius: 3,
                   boxShadow: "inset 0px 2px 6px rgba(0, 0, 0, 0.1)",
-                  minWidth: 150,
-                  height: "70vh",
+                  width:"30%",
+                  height: "70%",
                   textAlign: "center",
-                  width: "100%",
                 }}
               >
                 <Typography
@@ -125,13 +123,12 @@ function TaskList() {
                     fontWeight: "bold",
                     textTransform: "uppercase",
                     letterSpacing: 1,
-
                     color:
                       status === "To Do"
-                        ? "#d32f2f"
+                        ? "#38352e"
                         : status === "In Progress"
-                        ? "#388e3c"
-                        : "#512da8",
+                        ? "#38352e"
+                        : "#38352e",
                   }}
                 >
                   {status}
