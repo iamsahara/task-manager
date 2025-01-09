@@ -1,4 +1,4 @@
-import { Box, TextField, Button, Typography, Modal } from "@mui/material";
+import { Box, TextField, Button, Modal, Typography } from "@mui/material";
 import { useTaskContext } from "../context/TaskContext";
 import { useState } from "react";
 import axios from "axios";
@@ -19,6 +19,7 @@ function AddTask() {
       alert(" Please fill out all fields. ");
       return;
     }
+
     const newTask = {
       title,
       description,
@@ -26,7 +27,6 @@ function AddTask() {
       position: { x: 0, y: 0 },
     };
 
-    console.log("Sending task to backend:", newTask);
     try {
       const response = await axios.post("http://localhost:5001/tasks", newTask);
       dispatch({ type: "ADD-TASK", payload: response.data });
@@ -39,88 +39,117 @@ function AddTask() {
     }
   };
   return (
-    <Box
-      sx={{
-        padding: 3,
-        maxWidth: 450,
-        margin: "0 auto",
-        borderRadius: 3,
-        background: "linear-gradient(135deg, #5c6963, #D3D8C6)",
-        boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.2)",
-        color: "#fff",
-        animation: "float 3s ease-in-out infinite",
-      }}
-    >
-      <Typography
-        variant="h4"
+    <Box>
+      <Button
         sx={{
-          textAlign: "center",
-          mb: 3,
+          position: "fixed",
+          top: 30,
+          left: 30,
+          zIndex: 1000,
           fontWeight: "bold",
-          letterSpacing: 1,
-          textShadow: "1px 1px 5px rgba(0, 0, 0, 0.5)",
-          fontSize: "1.2rem",
+          fontSize: "0.875rem",
+          color: "#fff",
+          borderRadius: "50px",
+          padding: "10px 20px",
+          background: "linear-gradient(135deg, #db2955, #54494b)",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+          transition: "transform 0.2s ease, background-color 0.2s ease",
+          "&:hover": {
+            background: "linear-gradient(135deg, #ff4e8a, #54494b)",
+            transform: "scale(1.05)",
+            boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.3)",
+          },
+          "&:active": {
+            transform: "scale(0.95)",
+          },
         }}
         onClick={handleOpen}
       >
-        Add a New Task
-      </Typography>
+        + Add
+      </Button>
       <Modal open={open} onClose={handleClose}>
-        <form onSubmit={handleAddTask}>
-          <TextField
-            label="Task Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            fullWidth
-            margin="normal"
-            variant="outlined"
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "90%",
+            maxWidth: 400,
+            bgcolor: "#54494b",
+            color: "#fff",
+            padding: 4,
+            borderRadius: 3,
+            boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.3)",
+          }}
+        >
+          <Typography
+            variant="h5"
             sx={{
-              marginBottom: 2,
-              backgroundColor: "#ffffff",
-              borderRadius: 2,
-              ".MuiOutlinedInput-root": {
-                borderRadius: 2,
-              },
-            }}
-          />
-          <TextField
-            label="Task Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            multiline
-            rows={4}
-            sx={{
-              marginBottom: 2,
-              backgroundColor: "#ffffff",
-              borderRadius: 2,
-              ".MuiOutlinedInput-root": {
-                borderRadius: 2,
-              },
-            }}
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            sx={{
-              padding: 1.5,
-              borderRadius: 3,
+              textAlign: "center",
               fontWeight: "bold",
+              mb: 3,
               textTransform: "uppercase",
-              letterSpacing: 1,
-              backgroundColor: "#ff7eb3",
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-              "&:hover": {
-                backgroundColor: "#ff4e8a",
-              },
             }}
           >
             Add Task
-          </Button>
-        </form>
+          </Typography>
+          <form onSubmit={handleAddTask} >
+            <TextField
+              label="Task Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              fullWidth
+              margin="normal"
+              variant="filled"
+              sx={{
+                marginBottom: 2,
+                backgroundColor: "#ffffff",
+                borderRadius: 2,
+                ".MuiOutlinedInput-root": {
+                  borderRadius: 2,
+                },
+              }}
+            />
+            <TextField
+              label="Task Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              fullWidth
+              margin="normal"
+              variant="filled"
+              multiline
+              rows={4}
+              sx={{
+                marginBottom: 2,
+                backgroundColor: "#ffffff",
+                borderRadius: 2,
+                ".MuiOutlinedInput-root": {
+                  borderRadius: 2,
+                },
+              }}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{
+                padding: 1.5,
+                borderRadius: 3,
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                letterSpacing: 1,
+                backgroundColor: "#ff7eb3",
+                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                "&:hover": {
+                  backgroundColor: "#ff4e8a",
+                },
+              }}
+            >
+              Add Task
+            </Button>
+          </form>
+        </Box>
       </Modal>
     </Box>
   );

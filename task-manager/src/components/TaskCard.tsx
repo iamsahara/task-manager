@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Typography, Modal, Box, Button } from "@mui/material";
+import { Paper, Typography, Modal, Box, Button, colors } from "@mui/material";
 import DeleteTask from "./DeleteTask";
 import { useState } from "react";
 
@@ -76,7 +76,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
         >
           {task.description}
         </Typography>
-        <DeleteTask taskId={task.id} />
+        <DeleteTask taskId={task.id}/>
       </Paper>
       <Modal open={open} onClose={handleClose}>
         <Box
@@ -86,10 +86,10 @@ const TaskCard: React.FC<TaskCardProps> = ({
             left: "50%",
             transform: "translate(-50%, -50%)",
             width: 400,
-            maxWidth: 400,
-            background: "linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%)", // Change gradient here
-            color: "#333", // Adjust text color to contrast with the background
-            border: "1px solid #ffa07a", // Change border color
+            maxWidth: "90%",
+            background: "linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%)", 
+            color: "#333", 
+            border: "1px solid #ffa07a", 
             boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.3)",
             p: 4,
             borderRadius: 3,
@@ -97,13 +97,21 @@ const TaskCard: React.FC<TaskCardProps> = ({
             wordWrap: "break-word",
           }}
         >
-          <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
+            <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              mb: 2,
+            }}
+          ></Box>
+          <Typography id="task-title" variant="h6" sx={{ fontWeight: "bold", mb: 2, textAlign: "center" }}>
             {task.title}
           </Typography>
-          <Typography variant="body1" sx={{ color: "#333", mb: 3 }}>
+          <Typography variant="body1" sx={{ color: "#333", mb: 3, textAlign: "center" }}>
             {task.description}
           </Typography>
-          <Button variant="contained" color="primary" onClick={handleClose}>
+          <Button variant="contained"  sx={{background:"#723d46" }} onClick={handleClose}>
             Close
           </Button>
         </Box>
