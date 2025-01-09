@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Typography, Modal, Box, Button, colors } from "@mui/material";
+import { Paper, Typography, Modal, Box, Button } from "@mui/material";
 import DeleteTask from "./DeleteTask";
 import { useState } from "react";
 
@@ -33,10 +33,11 @@ const TaskCard: React.FC<TaskCardProps> = ({
         {...draggableProps}
         {...dragHandleProps}
         sx={{
+          position:"relative",
           padding: 1,
           backgroundColor:
             draggedTaskId === task.id
-              ? "linear-gradient(135deg, #A8988d 0%, #feb47b 100%)"
+              ? "linear-gradient(135deg, #54494b 0%, #54494b 100%)"
               : "#f1dede",
           border: "1px solid rgba(0, 0, 0, 0.1)",
           boxShadow:
@@ -60,6 +61,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
             color: "#333",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
+             backgroundColor: "#f7d6e0"
           }}
         >
           {task.title}
@@ -72,6 +74,8 @@ const TaskCard: React.FC<TaskCardProps> = ({
             overflow: "hidden",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
+           
+          
           }}
         >
           {task.description}
@@ -87,7 +91,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
             transform: "translate(-50%, -50%)",
             width: 400,
             maxWidth: "90%",
-            background: "linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%)", 
+            background: "linear-gradient(135deg, #f7d6e0 0%, #f7d6e0 100%)", 
             color: "#333", 
             border: "1px solid #ffa07a", 
             boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.3)",
@@ -111,7 +115,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
           <Typography variant="body1" sx={{ color: "#333", mb: 3, textAlign: "center" }}>
             {task.description}
           </Typography>
-          <Button variant="contained"  sx={{background:"#723d46" }} onClick={handleClose}>
+          <Button variant="contained"  sx={{ backgroundColor: "#f7d6e0",  color: "#333" }} onClick={handleClose}>
             Close
           </Button>
         </Box>

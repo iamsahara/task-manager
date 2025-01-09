@@ -116,13 +116,13 @@ function TaskList() {
                     position: "relative",
                     backgroundColor:
                       status === "To Do"
-                        ? "#faf9f9"
+                        ? "#918b76"
                         : status === "In Progress"
-                        ? "#d5b9b2"
-                        : "#bfb5af",
+                        ? "#626c66"
+                        : "#54494b",
                     padding: 3,
                     borderRadius: 3,
-                    boxShadow: "inset 0px 2px 6px rgba(0, 0, 0, 0.1)",
+                    boxShadow: "inset 0px 2px 6px rgba(0, 0, 0, 0.7)",
                     width: "30%",
                     height: "70%",
                     textAlign: "center",
@@ -136,10 +136,10 @@ function TaskList() {
                       letterSpacing: 1,
                       color:
                         status === "To Do"
-                          ? "#38352e"
+                          ? "#e1ca96"
                           : status === "In Progress"
-                          ? "#38352e"
-                          : "#38352e",
+                          ? "#e1ca96"
+                          : "#e1ca96",
                     }}
                   >
                     {status}

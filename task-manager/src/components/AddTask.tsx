@@ -48,14 +48,14 @@ function AddTask() {
           zIndex: 1000,
           fontWeight: "bold",
           fontSize: "0.875rem",
-          color: "#fff",
+          color: "#73683b",
           borderRadius: "50px",
           padding: "10px 20px",
-          background: "linear-gradient(135deg, #db2955, #54494b)",
+          background:"#ffe1a8",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
           transition: "transform 0.2s ease, background-color 0.2s ease",
           "&:hover": {
-            background: "linear-gradient(135deg, #ff4e8a, #54494b)",
+            background: "73683b",
             transform: "scale(1.05)",
             boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.3)",
           },
@@ -76,11 +76,11 @@ function AddTask() {
             transform: "translate(-50%, -50%)",
             width: "90%",
             maxWidth: 400,
-            bgcolor: "#54494b",
+            bgcolor: "#626c66",
             color: "#fff",
             padding: 4,
             borderRadius: 3,
-            boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.3)",
+            boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.6)",
           }}
         >
           <Typography
@@ -90,6 +90,7 @@ function AddTask() {
               fontWeight: "bold",
               mb: 3,
               textTransform: "uppercase",
+              color:"#b0a084"
             }}
           >
             Add Task
@@ -139,10 +140,10 @@ function AddTask() {
                 fontWeight: "bold",
                 textTransform: "uppercase",
                 letterSpacing: 1,
-                backgroundColor: "#ff7eb3",
+                backgroundColor: "#73683b",
                 boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
                 "&:hover": {
-                  backgroundColor: "#ff4e8a",
+                  backgroundColor: "#73683b",
                 },
               }}
             >

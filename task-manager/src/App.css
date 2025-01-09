@@ -5,7 +5,7 @@
   align-items: center; /* Align children vertically */
   justify-content: center; /* Align children horizontally */
   text-align: center;
-  background: linear-gradient(-45deg, #5c6963, #5c6963, #D3D8C6, #5c6963);
+  background: linear-gradient(-45deg, #b4b8ab, #b4b8ab, #867582, #b2d0c2);
   background-size: 400% 400%; /* Creates smooth animation */
   animation: gradientAnimation 15s ease infinite;
   height: 100vh; /* Ensures it spans the full viewport height */

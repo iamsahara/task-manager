@@ -3,7 +3,6 @@ import { IconButton } from "@mui/material";
 import { useTaskContext } from "../context/TaskContext";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
-
 type DeleteTaskProps = {
   taskId: string
 }
@@ -24,8 +23,10 @@ function DeleteTask({taskId} : DeleteTaskProps ) {
   return (
 <IconButton
   onClick={handleDeleteTask}
-  sx={{
-    "&:hover": { backgroundColor: "#ffebee" }, // Light red background on hover
+  sx={{marginLeft: "auto", position: "absolute",
+    top: 0, // Adjust as needed
+    right: 0, // Aligns to the right
+    "&:hover": { backgroundColor: "#db2955" }, // Light red background on hover
   }}
 >
   <DeleteOutlineIcon sx={{ fontSize: 24 }} />
