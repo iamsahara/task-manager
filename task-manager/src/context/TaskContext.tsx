@@ -16,7 +16,7 @@ interface Task {
   position: { x: 0; y: 0 };
 }
 
-type TaskStatus = "To Do" | "In Progress" | "Completed";
+export type TaskStatus = "To Do" | "In Progress" | "Done";
 interface TaskState {
   tasks: Task[];
 }

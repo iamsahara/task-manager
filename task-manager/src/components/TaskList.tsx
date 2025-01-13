@@ -15,16 +15,20 @@ import axios from "axios";
 import { useState } from "react";
 import TaskCard from "./TaskCard";
 import AddTask from "./AddTask";
+import { TaskStatus } from "../context/TaskContext";
+
 
 function TaskList() {
   const { state, dispatch } = useTaskContext();
   const [draggedTaskId, setDraggedTaskId] = useState<string | null>(null);
+
   const tasksByStatus = (status: string) =>
     state.tasks.filter((task) => task.status === status);
   const handleDragStart = (start: DragStart) => {
     const { draggableId } = start;
-    setDraggedTaskId(draggableId); // Store the ID of the dragged task
+    setDraggedTaskId(draggableId); 
   };
+
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
   const { width, height } = useWindowSize();
 
@@ -42,8 +46,6 @@ function TaskList() {
       setDraggedTaskId(null);
       return;
     }
-    // Find the dragged task
-
     const draggedTask = state.tasks.find(
       (task) => String(task.id) === draggableId
     );
@@ -52,20 +54,19 @@ function TaskList() {
       setDraggedTaskId(null);
       return;
     }
-    // Update the task's status and reorder tasks
-    const updatedTask = { ...draggedTask, status: destination.droppableId };
+  
+    const updatedTask = { ...draggedTask, status: destination.droppableId as TaskStatus};
     const updatedTasks = Array.from(
       state.tasks.filter((task) => task.id !== draggedTask.id)
     );
 
-    // Insert the updated task in the correct position
     updatedTasks.splice(destination.index, 0, updatedTask);
 
-    // Update state
+
     dispatch({ type: "SET-TASKS", payload: updatedTasks });
 
     try {
-      // Update backend
+  
       await axios.put(
         `http://localhost:5001/tasks/${draggedTask.id}`,
         updatedTask
@@ -80,7 +81,6 @@ function TaskList() {
       console.error("Error updating task:", error);
     }
 
-    // Clear the dragged task ID
     setDraggedTaskId(null);
   };
 
@@ -153,7 +153,7 @@ function TaskList() {
                       {(provided) => (
                         <TaskCard
                           task={task}
-                          draggedTaskId={draggedTaskId} // string | null
+                          draggedTaskId={draggedTaskId} 
                           innerRef={provided.innerRef}
                           draggableProps={provided.draggableProps}
                           dragHandleProps={provided.dragHandleProps}
