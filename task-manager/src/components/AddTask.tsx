@@ -76,7 +76,7 @@ function AddTask() {
             transform: "translate(-50%, -50%)",
             width: "90%",
             maxWidth: 400,
-            bgcolor: "#626c66",
+            background: "linear-gradient(135deg, #e2dee5 0%, #e2dee5 100%)",
             color: "#fff",
             padding: 4,
             borderRadius: 3,
@@ -90,7 +90,7 @@ function AddTask() {
               fontWeight: "bold",
               mb: 3,
               textTransform: "uppercase",
-              color:"#b0a084"
+              color:"#333"
             }}
           >
             Add Task
@@ -140,10 +140,11 @@ function AddTask() {
                 fontWeight: "bold",
                 textTransform: "uppercase",
                 letterSpacing: 1,
-                backgroundColor: "#73683b",
+                backgroundColor: "#f7d6e0",
+                color: "#333",
                 boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
                 "&:hover": {
-                  backgroundColor: "#73683b",
+                  backgroundColor: "#f7d6e0",
                 },
               }}
             >
