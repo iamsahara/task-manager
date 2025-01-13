@@ -2,6 +2,7 @@ import React from "react";
 import { Paper, Typography, Modal, Box, Button } from "@mui/material";
 import DeleteTask from "./DeleteTask";
 import { useState } from "react";
+import EditTask from "./EditTask";
 
 type TaskCardProps = {
   task: {
@@ -81,6 +82,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
           {task.description}
         </Typography>
         <DeleteTask taskId={task.id}/>
+        <EditTask taskId={task.id} initialDescription={task.description} initialTitle={task.title}/>
       </Paper>
       <Modal open={open} onClose={handleClose}>
         <Box

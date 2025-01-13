@@ -6,7 +6,6 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 type DeleteTaskProps = {
   taskId: string
 }
-
 function DeleteTask({taskId} : DeleteTaskProps ) {
   const { dispatch } = useTaskContext();
 

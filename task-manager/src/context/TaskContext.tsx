@@ -29,7 +29,8 @@ type TaskActions =
   | { type: "SET-TASKS"; payload: Task[] }
   | { type: "ADD-TASK"; payload: Task }
   | { type: "DELETE-TASK"; payload: string }
-  | { type: "UPDATE-STATUS"; payload: { id: string; status: TaskStatus } };
+  | { type: "UPDATE-STATUS"; payload: { id: string; status: TaskStatus } }
+  | { type: "EDIT-TASK"; payload: { id: string; updatedFields: { title?: string; description?: string } } }
 
 const TaskReducer = (state: TaskState, action: TaskActions): TaskState => {
   switch (action.type) {
@@ -49,6 +50,15 @@ const TaskReducer = (state: TaskState, action: TaskActions): TaskState => {
             : task
         ),
       };
+
+     case "EDIT-TASK":
+        return {
+          tasks: state.tasks.map((task) =>
+            task.id === action.payload.id
+              ? { ...task, ...action.payload.updatedFields }
+              : task
+          ),
+        };
     default:
       // console.warn("Unhandled action type:", action.type);
       return state;

@@ -7,16 +7,15 @@ app.use(cors());
 app.use(express.json());
 let tasks = [];
 
-
 app.get("/tasks", (req, res) => {
   res.json(tasks);
 });
 
 app.post("/tasks", (req, res) => {
-  console.log("Received request bodyIMAN:", req.body);
+  console.log("Received request body:", req.body);
   const { title, description, status } = req.body;
   const task = {
-    id: uuidv4(),
+    id: uuidv4(), 
     title,
     description,
     status: status || "To Do",
@@ -54,6 +53,22 @@ app.put("/tasks", (req, res) => {
     .status(200)
     .json({ message: "Task updated successfully", task: updatedTask });
 });
+
+app.patch("/tasks/:id") , (req, res) => {
+  const { id } = req.params;
+  const { title, description, status } = req.body;
+  const task = tasks.find((task) => task.id === id);
+  if (!task) {
+    return res.status(404).json({ error: "Task not found." });
+  }
+  if (title !== undefined) task.title = title;
+  if (description !== undefined) task.description = description;
+  if (status !== undefined) task.status = status;
+
+  res.json(task);
+}
+
+
 const PORT = 5001;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
