@@ -34,12 +34,12 @@ const TaskCard: React.FC<TaskCardProps> = ({
         {...draggableProps}
         {...dragHandleProps}
         sx={{
-          position:"relative",
+          position: "relative",
           padding: 1,
           backgroundColor:
             draggedTaskId === task.id
-              ? "linear-gradient(135deg, #54494b 0%, #54494b 100%)"
-              : "#f1dede",
+              ? "#f1dede"
+              : "linear-gradient(135deg, #54494b 0%, #54494b 100%)",
           border: "1px solid rgba(0, 0, 0, 0.1)",
           boxShadow:
             "0px 4px 10px rgba(0, 0, 0, 0.1), inset 0px -1px 3px rgba(0, 0, 0, 0.05)",
@@ -62,7 +62,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
             color: "#333",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
-             backgroundColor: "#f7d6e0"
           }}
         >
           {task.title}
@@ -71,18 +70,24 @@ const TaskCard: React.FC<TaskCardProps> = ({
           variant="body2"
           sx={{
             color: "#666",
-            marginBottom: 2,
+            margin: 2,
+            mb:4,
             overflow: "hidden",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
-           
-          
+            backgroundColor: "#e2dee5",
+            borderRadius:4,
+            p:2,
           }}
         >
           {task.description}
         </Typography>
-        <DeleteTask taskId={task.id}/>
-        <EditTask taskId={task.id} initialDescription={task.description} initialTitle={task.title}/>
+        <DeleteTask taskId={task.id} />
+        <EditTask
+          taskId={task.id}
+          initialDescription={task.description}
+          initialTitle={task.title}
+        />
       </Paper>
       <Modal open={open} onClose={handleClose}>
         <Box
@@ -93,9 +98,9 @@ const TaskCard: React.FC<TaskCardProps> = ({
             transform: "translate(-50%, -50%)",
             width: 400,
             maxWidth: "90%",
-            background: "linear-gradient(135deg, #f7d6e0 0%, #f7d6e0 100%)", 
-            color: "#333", 
-            border: "1px solid #ffa07a", 
+            background: "linear-gradient(135deg, #f7d6e0 0%, #f7d6e0 100%)",
+            color: "#333",
+            border: "1px solid #ffa07a",
             boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.3)",
             p: 4,
             borderRadius: 3,
@@ -103,7 +108,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
             wordWrap: "break-word",
           }}
         >
-            <Box
+          <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
@@ -111,13 +116,24 @@ const TaskCard: React.FC<TaskCardProps> = ({
               mb: 2,
             }}
           ></Box>
-          <Typography id="task-title" variant="h6" sx={{ fontWeight: "bold", mb: 2, textAlign: "center" }}>
+          <Typography
+            id="task-title"
+            variant="h5"
+            sx={{ fontWeight: "bold", mb: 2, textAlign: "center" }}
+          >
             {task.title}
           </Typography>
-          <Typography variant="body1" sx={{ color: "#333", mb: 3, textAlign: "center" }}>
+          <Typography
+            variant="body1"
+            sx={{ color: "#333", padding: 3, textAlign: "center",}}
+          >
             {task.description}
           </Typography>
-          <Button variant="contained"  sx={{ backgroundColor: "#f7d6e0",  color: "#333" }} onClick={handleClose}>
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "#f7d6e0", color: "#333" }}
+            onClick={handleClose}
+          >
             Close
           </Button>
         </Box>

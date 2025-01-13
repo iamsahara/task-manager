@@ -23,9 +23,13 @@ function DeleteTask({taskId} : DeleteTaskProps ) {
 <IconButton
   onClick={handleDeleteTask}
   sx={{marginLeft: "auto", position: "absolute",
-    top: 0, // Adjust as needed
-    right: 0, // Aligns to the right
-    "&:hover": { backgroundColor: "#db2955" }, // Light red background on hover
+    top: "70%", 
+    right: 0, 
+     transition: "transform 0.2s ease, color 0.2s ease",
+    "&:hover": { backgroundColor: "#db2955",transform: "scale(1.1)"}, 
+    "&:active": {
+      transform: "scale(1.1)", 
+    },
   }}
 >
   <DeleteOutlineIcon sx={{ fontSize: 24 }} />

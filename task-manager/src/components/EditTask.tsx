@@ -42,18 +42,14 @@ function EditTask({ taskId, initialTitle, initialDescription }: EditTaskProps) {
     try {
       const updatedTask = { title, description };
       console.log("This is updated Task:", updatedTask);
-      const response = await axios.patch(
+      await axios.patch(
         `http://localhost:5001/tasks/${taskId}`,
         updatedTask
       );
-  
-
       dispatch({
-        
         type: "EDIT-TASK",
         payload: { id: taskId, updatedFields: updatedTask },
       });
-      console.log("Task edited successfully:", response.data);
       handleClose();
     } catch (error) {
       console.error("Error editing task", error);
@@ -75,7 +71,17 @@ function EditTask({ taskId, initialTitle, initialDescription }: EditTaskProps) {
           "&:hover": { backgroundColor: "#db2955" },
         }}
       >
-        <EditOutlinedIcon sx={{ fontSize: 24 }} />
+        <EditOutlinedIcon sx={{
+    fontSize: 24, 
+    marginLeft: "auto", position: "absolute",
+    top: 0, 
+    right: 0, 
+    transition: "transform 0.2s ease, color 0.2s ease", 
+    "&:hover": { backgroundColor: "#db2955",transform: "scale(1.2)"}, 
+    "&:active": {
+      transform: "scale(1)", 
+    },
+  }} />
       </IconButton>
       <Modal open={open} onClose={handleClose}>
         <Box
