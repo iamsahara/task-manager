@@ -54,19 +54,19 @@ app.put("/tasks", (req, res) => {
     .json({ message: "Task updated successfully", task: updatedTask });
 });
 
-app.patch("/tasks/:id") , (req, res) => {
+app.patch("/tasks/:id", (req, res) => {
   const { id } = req.params;
-  const { title, description, status } = req.body;
-  const task = tasks.find((task) => task.id === id);
-  if (!task) {
-    return res.status(404).json({ error: "Task not found." });
+  console.log(id)
+  const updatedFields = req.body;
+  console.log(updatedFields)
+  const taskIndex = tasks.findIndex(task => task.id === id);
+  if (taskIndex === -1) {
+    return res.status(404).json({ error: "Task not found" }); 
   }
-  if (title !== undefined) task.title = title;
-  if (description !== undefined) task.description = description;
-  if (status !== undefined) task.status = status;
+  tasks[taskIndex] = { ...tasks[taskIndex], ...updatedFields };
 
-  res.json(task);
-}
+  res.status(200).json(tasks[taskIndex]);
+});
 
 
 const PORT = 5001;

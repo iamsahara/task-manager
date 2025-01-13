@@ -36,15 +36,20 @@ function EditTask({ taskId, initialTitle, initialDescription }: EditTaskProps) {
       alert("Please fill out all fields.");
       return;
     }
+    console.log("Editing task with ID:", taskId);
+
 
     try {
       const updatedTask = { title, description };
+      console.log("This is updated Task:", updatedTask);
       const response = await axios.patch(
         `http://localhost:5001/tasks/${taskId}`,
         updatedTask
       );
+  
 
       dispatch({
+        
         type: "EDIT-TASK",
         payload: { id: taskId, updatedFields: updatedTask },
       });
