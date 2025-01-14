@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(-45deg, #2c5364, #474845, #0f2027, #203a43);
+  background: linear-gradient(-45deg, black, #2c5364, #0f2027, black);
   animation: gradientAnimation 20s ease infinite;
   background-size: 300% 300%; 
   animation: gradientAnimation 10s ease infinite;

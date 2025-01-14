@@ -14,6 +14,8 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.3.1",
     "@mui/material": "^6.3.1",
+    "@react-three/drei": "^9.120.8",
+    "@react-three/fiber": "^8.17.12",
     "axios": "^1.7.9",
     "date-fns": "^4.1.0",
     "react": "^18.3.1",
@@ -23,6 +25,7 @@
     "react-draggable": "^4.4.6",
     "react-toastify": "^11.0.2",
     "react-use": "^17.6.0",
+    "three": "^0.172.0",
     "uuid": "^11.0.3"
   },
   "devDependencies": {
@@ -30,6 +33,7 @@
     "@types/react": "^18.3.17",
     "@types/react-beautiful-dnd": "^13.1.8",
     "@types/react-dom": "^18.3.5",
+    "@types/three": "^0.172.0",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.17.0",
     "eslint-plugin-react-hooks": "^5.0.0",

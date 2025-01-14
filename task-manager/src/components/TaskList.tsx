@@ -1,3 +1,4 @@
+
 import { useTaskContext } from "../context/TaskContext";
 import Confetti from "react-confetti";
 import { toast } from "react-toastify";
@@ -75,12 +76,11 @@ function TaskList() {
       if (destination.droppableId === "Done") {
         setShowConfetti(true);
         toast.success("🎉 Congrats on completing a task!");
-        setTimeout(() => setShowConfetti(false), 5000);
+        setTimeout(() => setShowConfetti(false), 7000);
       }
     } catch (error) {
       console.error("Error updating task:", error);
     }
-
     setDraggedTaskId(null);
   };
 
@@ -92,7 +92,7 @@ function TaskList() {
         <Box
           sx={{
             display: "flex",
-            flexDirection: { xs: "column", sm: "row" },
+            flexDirection: { xs: "column", sm: "row", md: "row", lg: "column", xl: "row" },
             alignItems: "flex-start",
             gap: 3,
             width: "95%",
@@ -101,7 +101,7 @@ function TaskList() {
             borderRadius: 4,
             mr: { xs: 8, sm: 6 },
             flexWrap: "wrap",
-            mt: { xs: 8, sm: 6 },
+            mt: { xs: 8, sm:6 },
           }}
         >
           {["To Do", "In Progress", "Done"].map((status) => (
@@ -130,7 +130,7 @@ function TaskList() {
                     textAlign: "center",
                     "@media (max-width: 768px)": {
                       width: "80%",
-                      height: "auto",
+                      height: { xs: "60vh", sm: "60vh", md: "60vh", lg: "60vh", xl: "60vh" },
                     },
                   }}
                 >
