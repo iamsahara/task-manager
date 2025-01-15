@@ -9,21 +9,24 @@ const AstronautModel = () => {
   const astronautRef = useRef<THREE.Object3D>(null);
 
   useFrame(({ clock }) => {
-    const time = clock.getElapsedTime()/6;
+    const time = clock.getElapsedTime() / 10; 
     if (astronautRef.current) {
-      const radius = 5; 
-      astronautRef.current.position.x = Math.sin(time) * radius; 
-      astronautRef.current.position.z = Math.cos(time) * radius; 
-      astronautRef.current.position.y = Math.sin(time * 1) * 1;
-      astronautRef.current.rotation.y += 0.01; 
+      const radius = 10; 
+      astronautRef.current.position.x = Math.sin(time) * radius * 0.6; 
+      astronautRef.current.position.z = Math.cos(time) * radius * 0.5; 
+      astronautRef.current.position.y = Math.sin(time ) * 1; 
+      astronautRef.current.rotation.y += 0.001; 
       astronautRef.current.rotation.x += 0.005; 
+      astronautRef.current.rotation.z += 0.008; 
     }
   });
 
-  return <primitive ref={astronautRef} object={model.scene} scale={0.9} />;
+  return <primitive ref={astronautRef} object={model.scene} scale={2} />;
 };
 
 const Astronaut: React.FC = () => {
+  const cameraTarget = useRef(new THREE.Vector3(0, 0, 0));
+
   return (
     <Canvas
       style={{
@@ -31,17 +34,22 @@ const Astronaut: React.FC = () => {
         top: 0,
         left: 0,
         width: "100%",
-        height: "100vh",
+        height: "100%",
         pointerEvents: "none",
         zIndex: 1,
       }}
-      camera={{ position: [0, 1, 5], fov: 50 }}
+      camera={{ position: [20, 2, 6], fov: 50 }}
     >
       <ambientLight intensity={0.8} />
       <directionalLight position={[5, 5, 5]} />
-      <Stars radius={120} depth={30} count={4000} factor={6} fade />
+      <Stars radius={100} depth={30} count={3000} factor={6} fade />
       <AstronautModel />
-      <OrbitControls enableZoom={false} enablePan={false} />
+      <OrbitControls
+        enableZoom={false}
+        enablePan={false}
+        rotateSpeed={0.5}
+        target={cameraTarget.current}
+      />
     </Canvas>
   );
 };

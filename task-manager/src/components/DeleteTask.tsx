@@ -22,11 +22,11 @@ function DeleteTask({taskId} : DeleteTaskProps ) {
   return (
 <IconButton
   onClick={handleDeleteTask}
-  sx={{marginLeft: "auto", position: "absolute",
+  sx={{ position: "absolute",
     top: "70%", 
     right: 0, 
      transition: "transform 0.2s ease, color 0.2s ease",
-    "&:hover": { backgroundColor: "#db2955",transform: "scale(1.1)"}, 
+    "&:hover": { backgroundColor: "#f7d6e0",transform: "scale(1.1)"}, 
     "&:active": {
       transform: "scale(1.1)", 
     },

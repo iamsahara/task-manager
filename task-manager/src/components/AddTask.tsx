@@ -2,6 +2,7 @@ import { Box, TextField, Button, Modal, Typography } from "@mui/material";
 import { useTaskContext } from "../context/TaskContext";
 import { useState } from "react";
 import axios from "axios";
+import RocketLaunchOutlinedIcon from "@mui/icons-material/RocketLaunchOutlined";
 
 function AddTask() {
   const { dispatch } = useTaskContext();
@@ -16,7 +17,7 @@ function AddTask() {
     e.preventDefault();
 
     if (!title.trim() || !description.trim()) {
-      alert(" Please fill out all fields. ");
+      alert("Please fill out all fields.");
       return;
     }
 
@@ -33,11 +34,13 @@ function AddTask() {
       console.log("Task added successfully:", response.data);
       setTitle("");
       setDescription("");
+      handleClose();
     } catch (error) {
       console.error("Error adding task:", error);
       alert("Failed to add task. Please try again.");
     }
   };
+
   return (
     <Box>
       <Button
@@ -47,25 +50,30 @@ function AddTask() {
           left: 30,
           zIndex: 1000,
           fontWeight: "bold",
-          fontSize: "0.875rem",
-          color: "#3c3442",
-          borderRadius: "10px",
-          padding: "10px 10px",
-          background:"#e5e5de",
-          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-          transition: "transform 0.2s ease, background-color 0.2s ease",
+          fontSize: "1rem",
+          color: "#fff",
+          borderRadius: "50%",
+          padding: "15px",
+          width: "60px",
+          height: "60px",
+          background:
+            "radial-gradient(circle, #f7d6e0 0%, #e1a4c7 50%, #b184a9 100%)",
+          boxShadow: "0px 6px 15px rgba(0, 0, 0, 0.3)",
+          transition: "transform 0.2s ease, box-shadow 0.2s ease",
           "&:hover": {
-            background: "3c3442",
-            transform: "scale(1.05)",
-            boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.3)",
+            transform: "scale(1.1)",
+            boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.4)",
           },
           "&:active": {
             transform: "scale(0.95)",
           },
         }}
-        onClick={handleOpen}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleOpen();
+        }}
       >
-        + Add
+        +
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box
@@ -76,12 +84,14 @@ function AddTask() {
             transform: "translate(-50%, -50%)",
             width: "90%",
             maxWidth: 400,
-            background: "linear-gradient(135deg, #e2dee5 0%, #e2dee5 100%)",
+            background: "linear-gradient(135deg, #2c5364, #0f2027)",
             color: "#fff",
             padding: 4,
             borderRadius: 3,
-            boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.6)",
+            boxShadow: "0px 8px 30px rgba(0, 0, 0, 0.6)",
+            animation: "fadeIn 0.3s ease-in-out",
           }}
+          
         >
           <Typography
             variant="h5"
@@ -90,12 +100,16 @@ function AddTask() {
               fontWeight: "bold",
               mb: 3,
               textTransform: "uppercase",
-              color:"#333"
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 1,
             }}
           >
+            <RocketLaunchOutlinedIcon fontSize="large" />
             Add Task
           </Typography>
-          <form onSubmit={handleAddTask} >
+          <form onSubmit={handleAddTask}>
             <TextField
               label="Task Title"
               value={title}
@@ -107,7 +121,7 @@ function AddTask() {
                 marginBottom: 2,
                 backgroundColor: "#ffffff",
                 borderRadius: 2,
-                ".MuiOutlinedInput-root": {
+                ".MuiFilledInput-root": {
                   borderRadius: 2,
                 },
               }}
@@ -125,7 +139,7 @@ function AddTask() {
                 marginBottom: 2,
                 backgroundColor: "#ffffff",
                 borderRadius: 2,
-                ".MuiOutlinedInput-root": {
+                ".MuiFilledInput-root": {
                   borderRadius: 2,
                 },
               }}
@@ -140,11 +154,11 @@ function AddTask() {
                 fontWeight: "bold",
                 textTransform: "uppercase",
                 letterSpacing: 1,
-                backgroundColor: "#f7d6e0",
+                background: "linear-gradient(90deg, #f7d6e0, #e2dee5)",
                 color: "#333",
                 boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
                 "&:hover": {
-                  backgroundColor: "#f7d6e0",
+                  background: "linear-gradient(90deg, #e2dee5, #f7d6e0)",
                 },
               }}
             >

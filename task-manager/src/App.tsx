@@ -7,7 +7,7 @@ function App() {
     <>
 
       <TaskList />
-      <Astronaut />
+      <Astronaut />å
     </>
   );
 }

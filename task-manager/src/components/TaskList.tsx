@@ -1,4 +1,3 @@
-
 import { useTaskContext } from "../context/TaskContext";
 import Confetti from "react-confetti";
 import { toast } from "react-toastify";
@@ -21,16 +20,15 @@ import { TaskStatus } from "../context/TaskContext";
 function TaskList() {
   const { state, dispatch } = useTaskContext();
   const [draggedTaskId, setDraggedTaskId] = useState<string | null>(null);
+  const [showConfetti, setShowConfetti] = useState<boolean>(false);
+  const { width, height } = useWindowSize();
 
   const tasksByStatus = (status: string) =>
     state.tasks.filter((task) => task.status === status);
-  const handleDragStart = (start: DragStart) => {
-    const { draggableId } = start;
-    setDraggedTaskId(draggableId);
-  };
 
-  const [showConfetti, setShowConfetti] = useState<boolean>(false);
-  const { width, height } = useWindowSize();
+  const handleDragStart = (start: DragStart) => {
+    setDraggedTaskId(start.draggableId);
+  };
 
   const handleDragEnd = async (result: DropResult) => {
     const { destination, source, draggableId } = result;
@@ -39,6 +37,7 @@ function TaskList() {
       setDraggedTaskId(null);
       return;
     }
+
     if (
       source.droppableId === destination.droppableId &&
       source.index === destination.index
@@ -46,33 +45,22 @@ function TaskList() {
       setDraggedTaskId(null);
       return;
     }
-    const draggedTask = state.tasks.find(
-      (task) => String(task.id) === draggableId
-    );
+
+    const draggedTask = state.tasks.find((task) => String(task.id) === draggableId);
     if (!draggedTask) {
       console.error("Dragged task not found");
       setDraggedTaskId(null);
       return;
     }
 
-    const updatedTask = {
-      ...draggedTask,
-      status: destination.droppableId as TaskStatus,
-    };
-    const updatedTasks = Array.from(
-      state.tasks.filter((task) => task.id !== draggedTask.id)
-    );
-
+    const updatedTask = { ...draggedTask, status: destination.droppableId as TaskStatus };
+    const updatedTasks = state.tasks.filter((task) => task.id !== draggedTask.id);
     updatedTasks.splice(destination.index, 0, updatedTask);
 
     dispatch({ type: "SET-TASKS", payload: updatedTasks });
 
     try {
-      await axios.put(
-        `http://localhost:5001/tasks/${draggedTask.id}`,
-        updatedTask
-      );
-      console.log("Task updated successfully");
+      await axios.put(`http://localhost:5001/tasks/${draggedTask.id}`, updatedTask);
       if (destination.droppableId === "Done") {
         setShowConfetti(true);
         toast.success("🎉 Congrats on completing a task!");
@@ -81,27 +69,22 @@ function TaskList() {
     } catch (error) {
       console.error("Error updating task:", error);
     }
+
     setDraggedTaskId(null);
   };
 
   return (
     <DragDropContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       {showConfetti && <Confetti width={width} height={height} />}
-      <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
+      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, width: "100%" }}>
         <AddTask />
         <Box
           sx={{
             display: "flex",
-            flexDirection: { xs: "column", sm: "row", md: "row", lg: "column", xl: "row" },
-            alignItems: "flex-start",
-            gap: 3,
+            flexDirection: { xs: "column", sm: "row" },
+            gap: 4,
             width: "95%",
-            height: { sx: "100vh", sm: "60vh" },
-            padding: 3,
-            borderRadius: 4,
-            mr: { xs: 8, sm: 6 },
-            flexWrap: "wrap",
-            mt: { xs: 8, sm:6 },
+            mt: 4,
           }}
         >
           {["To Do", "In Progress", "Done"].map((status) => (
@@ -115,8 +98,6 @@ function TaskList() {
                     display: "flex",
                     flexDirection: "column",
                     gap: 3,
-                    overflowY: "auto",
-                    position: "relative",
                     backgroundColor:
                       status === "To Do"
                         ? "#e0e0e0"
@@ -125,13 +106,12 @@ function TaskList() {
                         : "#e5e5de",
                     padding: 3,
                     borderRadius: 3,
-                    width: "30%",
-                    height: "100%",
-                    textAlign: "center",
-                    "@media (max-width: 768px)": {
-                      width: "80%",
-                      height: { xs: "60vh", sm: "60vh", md: "60vh", lg: "60vh", xl: "60vh" },
-                    },
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    height: "50vh",
+                    overflowY: "auto", 
+                    minWidth:"25%",
+                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
                   }}
                 >
                   <Typography
@@ -140,15 +120,7 @@ function TaskList() {
                       fontWeight: "bold",
                       textTransform: "uppercase",
                       letterSpacing: 1,
-                      "@media (max-width: 768px)": {
-                        width: "100%",
-                      },
-                      color:
-                        status === "To Do"
-                          ? "#3c3442"
-                          : status === "In Progress"
-                          ? "#3c3442"
-                          : "#3c3442",
+                      color: "#3c3442",
                     }}
                   >
                     {status}
